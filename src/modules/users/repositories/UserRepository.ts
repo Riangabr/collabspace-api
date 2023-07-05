@@ -1,6 +1,6 @@
 import { prisma } from "@libs/prismaClient";
 
-import { ICreateUser, IUser } from "@modules/users/dto/users";
+import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dto/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
@@ -29,6 +29,23 @@ class UserRepository implements IUsersRepositories {
   listByEmail(email: string): Promise<IUser | null> {
     return prisma.users.findFirst({
       where: { email: { equals: email } },
+    });
+  }
+
+  listById(id: string): Promise<IUser | null> {
+    return prisma.users.findFirst({
+      where: { id },
+    });
+  }
+
+  async update({ id, name, telephone, birthDate }: IUpdateUser): Promise<void> {
+    await prisma.users.update({
+      where: { id },
+      data: {
+        name,
+        telephone,
+        birth_date: birthDate,
+      },
     });
   }
 }

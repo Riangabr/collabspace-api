@@ -29,4 +29,23 @@ interface ICreateUser {
   avatarUrl?: string;
 }
 
-export { IUser, ICreateUser, IRequestCreateUser };
+interface IRequestUpdateUser {
+  name: string;
+  telephone: string;
+  birthDate: string;
+}
+
+interface IUpdateUser {
+  id: string;
+  name?: string;
+  telephone?: string | null;
+  birthDate?: string;
+}
+
+export {
+  IUser,
+  ICreateUser,
+  IRequestCreateUser,
+  IRequestUpdateUser,
+  IUpdateUser,
+};
