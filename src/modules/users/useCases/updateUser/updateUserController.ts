@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
 import { IRequestUpdateUser } from "@modules/users/dto/users";
+import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { UpdateUserUseCase } from "./updateUserUseCase";
 
@@ -20,5 +20,4 @@ class UpdateUserController {
     return response.status(result.statusCode).json(result);
   }
 }
-
 export { UpdateUserController };

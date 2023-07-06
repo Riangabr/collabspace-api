@@ -1,10 +1,10 @@
 import { container } from "tsyringe";
 
 import { IUuidProvider } from "./uuidProvider/IUuidProvider";
-import { UuidProvider } from "./uuidProvider/implamentation/UuidProvider";
+import { UuidProvider } from "./uuidProvider/implementation/UuidProvider"; // Singleton é uma class instanciada
 
 import { IBcryptProvider } from "./bcryptProvider/IBcryptProvider";
-import { BcryptProvider } from "./bcryptProvider/implamentation/BcryptProvider";
+import { BcryptProvider } from "./bcryptProvider/implementation/BcryptProvider";
 
 container.registerSingleton<IUuidProvider>("UuidProvider", UuidProvider);
 

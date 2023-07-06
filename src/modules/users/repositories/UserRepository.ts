@@ -4,6 +4,10 @@ import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dto/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
+  inactivate(id: string, status: boolean): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+
   create({
     id,
     name,
@@ -46,6 +50,13 @@ class UserRepository implements IUsersRepositories {
         telephone,
         birth_date: birthDate,
       },
+    });
+  }
+
+  async Inactivate(id: string, status: boolean): Promise<void> {
+    await prisma.users.update({
+      where: { id },
+      data: { active: status },
     });
   }
 }

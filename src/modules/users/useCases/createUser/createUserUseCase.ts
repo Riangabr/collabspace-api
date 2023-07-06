@@ -1,10 +1,9 @@
 import { inject, injectable } from "tsyringe";
-
 import { IRequestCreateUser } from "@modules/users/dto/users";
 import { telephoneFormat } from "@utils/formatData";
 import { AppResponse } from "@helpers/responseParser";
 import { AppError } from "@helpers/errorsHandler";
-import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IUsersRepositories } from "../../iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
 
@@ -17,7 +16,7 @@ class CreateUserUseCase {
     private uuidProvider: IUuidProvider,
     @inject("BcryptProvider")
     private bcryptProvider: IBcryptProvider
-  ) {}
+  ) {} // quando usamos inversão de dependencias, fazemos com que a class não dependa de uma dependecia especifica;
 
   async execute({
     name,

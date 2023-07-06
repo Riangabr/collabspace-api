@@ -27,7 +27,7 @@ class CreateUserController {
       birthDate,
     });
 
-    return res.status(result.statusCode).json(result);
+    res.status(result.statusCode).json(result);
   }
 }
 

@@ -4,3 +4,4 @@ interface IUuidProvider {
 }
 
 export { IUuidProvider };
+/* Esses são os parametros da implementação */

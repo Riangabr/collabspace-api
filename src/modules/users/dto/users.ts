@@ -42,6 +42,7 @@ interface IUpdateUser {
   birthDate?: string;
 }
 
+
 export {
   IUser,
   ICreateUser,
