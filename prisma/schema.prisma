@@ -57,6 +57,7 @@ model users {
   password                         String      @db.VarChar
   avatar_url                       String?     @db.VarChar
   created_at                       DateTime    @default(now()) @db.Timestamp(6)
+  active                           Boolean     @default(true)
   comments                         comments[]
   friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")
   friends_friends_user_id_2Tousers friends[]   @relation("friends_user_id_2Tousers")

@@ -9,5 +9,12 @@ class BcryptProvider implements IBcryptProvider {
 
     return { salt, hash };
   }
+
+  async checkPassword(
+    password: string,
+    encryptedPassword: string
+  ): Promise<boolean> {
+    return bcryptjs.compare(password, encryptedPassword);
+  }
 }
 export { BcryptProvider };
