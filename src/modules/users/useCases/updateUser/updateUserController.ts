@@ -5,7 +5,7 @@ import { UpdateUserUseCase } from "./updateUserUseCase";
 
 class UpdateUserController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params as { id: string };
+    const id = request.usrId;
     const { name, telephone, birthDate } = request.body as IRequestUpdateUser;
 
     const updateUseCase = container.resolve(UpdateUserUseCase);

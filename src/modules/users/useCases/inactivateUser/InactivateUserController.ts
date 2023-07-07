@@ -4,7 +4,7 @@ import { InactivateUserUseCase } from "./inactivateUserUseCase";
 
 class InactivateUserController {
   async handle(request: Request, response: Response) {
-    const { id } = request.params as { id: string };
+    const id = request.usrId;
 
     const inactivateUserUseCase = container.resolve(InactivateUserUseCase);
 

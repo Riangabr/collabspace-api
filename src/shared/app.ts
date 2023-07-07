@@ -39,5 +39,12 @@ app.use(
 );
 
 export { app };
-
-// REQ ->(Server -> app) ROUTES -> CONTROLLER(RES) <-> USECASE <-> REPOSITORY <-> PRISMA <-> DATABASE
+/*
+ REQ ->(Server -> app) 
+ ROUTES -> 
+ CONTROLLER(RES) <->
+  USECASE <->
+   REPOSITORY <->
+    PRISMA <->
+     DATABASE 
+*/
