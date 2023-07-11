@@ -21,4 +21,17 @@ interface ICreatePost {
   visibility?: number;
 }
 
-export { IPost, ICreatePost, IRequestCreatePost };
+interface IListAllPosts {
+  id: string;
+  content: string;
+  tags: string | null;
+  visibility: number;
+  published_at: Date;
+  users: {
+    id: string;
+    name: string;
+    avatar_url: string | null;
+  };
+}
+
+export { IPost, ICreatePost, IRequestCreatePost, IListAllPosts };
