@@ -4,6 +4,7 @@ interface IPostsRepositories {
   create(post: ICreatePost): Promise<IPost>;
   listById(id: string): Promise<IPost | null>;
   listAll(page: number, limit: number): Promise<IListAllPosts[]>;
+  count(): Promise<number>;
   update(data: IUpdatePost): Promise<void>;
 }
 

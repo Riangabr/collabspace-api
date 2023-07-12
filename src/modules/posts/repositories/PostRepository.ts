@@ -49,6 +49,10 @@ class PostRepository implements IPostsRepositories {
     });
   }
 
+  count(): Promise<number> {
+    return prisma.posts.count();
+  }
+
   async update({ id, content, tags, visibility }: IUpdatePost): Promise<void> {
     await prisma.posts.update({
       where: { id },
