@@ -1,7 +1,9 @@
-import { ICreateComment, Icomment } from "../dtos/comments";
+import { ICreateComment, IUpdateComment, Icomment } from "../dtos/comments";
 
 interface ICommentsRepositories {
   create(comment: ICreateComment): Promise<Icomment>;
+  listById(id: string): Promise<Icomment | null>;
+  update(data: IUpdateComment): Promise<void>;
 }
 
 export { ICommentsRepositories };
