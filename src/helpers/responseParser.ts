@@ -5,6 +5,10 @@ interface IAppResponse {
 }
 
 class AppResponse {
+  status(statusCode: number) {
+    throw new Error("Method not implemented.");
+  }
+
   public readonly statusCode: number;
   public readonly result: string;
   public readonly message: string | undefined;

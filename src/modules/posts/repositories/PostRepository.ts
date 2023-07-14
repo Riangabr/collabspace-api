@@ -45,6 +45,20 @@ class PostRepository implements IPostsRepositories {
             avatar_url: true,
           },
         },
+        comments: {
+          select: {
+            id: true,
+            content: true,
+            commented_at: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+                avatar_url: true,
+              },
+            },
+          },
+        },
       },
     });
   }
