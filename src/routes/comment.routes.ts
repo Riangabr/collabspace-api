@@ -10,6 +10,6 @@ commentRoutes.use(authentication);
 
 commentRoutes.post("/:id", new CreateCommentController().handle);
 commentRoutes.put("/:id", new UpdateCommentController().handle);
-commentRoutes.delete("/:id /: postId", new DeleteCommentController().handle);
+commentRoutes.delete("/:id/:postId", new DeleteCommentController().handle);
 
 export { commentRoutes };
