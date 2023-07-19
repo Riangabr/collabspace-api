@@ -21,7 +21,7 @@ class InactivateUserUseCase {
   async execute({ id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido",
+        message: "ID é inválido!",
       });
     }
 
@@ -29,11 +29,14 @@ class InactivateUserUseCase {
 
     if (!listUserById) {
       throw new AppError({
-        message: "Usuario não encontrado",
+        message: "Usuário não encontrado!",
       });
     }
+
+    await this.userRepository.inactivate(id, false);
+
     return new AppResponse({
-      message: "Usuario inativado com sucesso!",
+      message: "Usuário inativado com sucesso!",
     });
   }
 }

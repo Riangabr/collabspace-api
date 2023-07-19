@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
+
 import { AppResponse } from "@helpers/responseParser";
-import { IRequestUpdateUser } from "@modules/users/dto/users";
+import { IRequestUpdateUser } from "@modules/users/dtos/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { AppError } from "@helpers/errorsHandler";
@@ -30,13 +31,15 @@ class UpdateUserUseCase {
         message: "ID é inválido!",
       });
     }
+
     const listUserById = await this.userRepository.listById(id);
 
     if (!listUserById) {
       throw new AppError({
-        message: "Usuário não encontrado",
+        message: "Usuário não encontrado!",
       });
     }
+
     await this.userRepository.update({
       id,
       name,
@@ -45,7 +48,7 @@ class UpdateUserUseCase {
     });
 
     return new AppResponse({
-      message: "Usuário atualizado com sucesso",
+      message: "Usuário atualizado com sucesso!",
     });
   }
 }

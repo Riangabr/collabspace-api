@@ -1,16 +1,16 @@
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 import { sign } from "jsonwebtoken";
 import { AppResponse } from "@helpers/responseParser";
-import { IRequestCreateUserSesssion } from "@modules/users/dto/sessions";
+import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { AppError } from "@helpers/errorsHandler";
 import { IBcryptProvider } from "@shared/container/providers/bcryptProvider/IBcryptProvider";
-import { inject, injectable } from "tsyringe";
 
 @injectable()
 class CreateUserSessionUseCase {
   constructor(
     @inject("UserRepository")
-    private useRepository: IUsersRepositories,
+    private userRepository: IUsersRepositories,
     @inject("BcryptProvider")
     private bcryptProvider: IBcryptProvider
   ) {}
@@ -18,19 +18,21 @@ class CreateUserSessionUseCase {
   async execute({
     email,
     password,
-  }: IRequestCreateUserSesssion): Promise<AppResponse> {
-    const listUserByEmail = await this.useRepository.listByEmail(email);
+  }: IRequestCreateUserSession): Promise<AppResponse> {
+    const listUserByEmail = await this.userRepository.listByEmail(email);
 
     if (!listUserByEmail) {
       throw new AppError({
-        message: "Email ou senha incorretos!",
+        message: "E-mail ou senha incorretos!",
       });
     }
+
     if (!listUserByEmail.active) {
       throw new AppError({
         message: "Usuário inativo!",
       });
     }
+
     const passwordMatch = await this.bcryptProvider.checkPassword(
       password,
       listUserByEmail.password
@@ -38,7 +40,7 @@ class CreateUserSessionUseCase {
 
     if (!passwordMatch) {
       throw new AppError({
-        message: "E-mail ou senha incorretos",
+        message: "E-mail ou senha incorretos!",
       });
     }
 
@@ -52,7 +54,7 @@ class CreateUserSessionUseCase {
     });
 
     return new AppResponse({
-      message: "Usuario logado com sucesso!",
+      message: "Usuário logado com sucesso!",
       data: {
         token,
         user: {
@@ -61,8 +63,8 @@ class CreateUserSessionUseCase {
           email: listUserByEmail.email,
           telephone: listUserByEmail.telephone,
           birthDate: listUserByEmail.birth_date,
-          avatarURL: listUserByEmail.avatar_url,
-          cretedAt: listUserByEmail.created_at,
+          avatarUrl: listUserByEmail.avatar_url,
+          createdAt: listUserByEmail.created_at,
         },
       },
     });

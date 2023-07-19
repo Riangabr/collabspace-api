@@ -1,4 +1,4 @@
-interface Icomment {
+interface IComment {
   id: string;
   post_id: string;
   user_id: string;
@@ -25,10 +25,11 @@ interface IUpdateComment {
   id: string;
   content: string;
 }
+
 export {
-  Icomment,
-  ICreateComment,
+  IComment,
   IRequestCreateComment,
+  ICreateComment,
   IRequestUpdateComment,
   IUpdateComment,
 };

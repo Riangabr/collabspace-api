@@ -1,13 +1,9 @@
 import { prisma } from "@libs/prismaClient";
 
-import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dto/users";
+import { ICreateUser, IUpdateUser, IUser } from "@modules/users/dtos/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 
 class UserRepository implements IUsersRepositories {
-  inactivate(id: string, status: boolean): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-
   create({
     id,
     name,
@@ -53,7 +49,7 @@ class UserRepository implements IUsersRepositories {
     });
   }
 
-  async Inactivate(id: string, status: boolean): Promise<void> {
+  async inactivate(id: string, status: boolean): Promise<void> {
     await prisma.users.update({
       where: { id },
       data: { active: status },

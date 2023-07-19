@@ -1,9 +1,10 @@
-import { v4 as uuidv4, validate } from "uuid";
+import { v4 as uuidV4, validate } from "uuid";
+
 import { IUuidProvider } from "../IUuidProvider";
 
 class UuidProvider implements IUuidProvider {
   createUUID(): string {
-    return uuidv4();
+    return uuidV4();
   }
 
   validateUUID(uuid: string): boolean {

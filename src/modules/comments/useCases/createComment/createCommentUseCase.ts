@@ -1,10 +1,10 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
+import { inject, injectable } from "tsyringe";
 import { IRequestCreateComment } from "@modules/comments/dtos/comments";
 import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
-import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRespositories";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { inject, injectable } from "tsyringe";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest extends IRequestCreateComment {
   postId: string;
@@ -25,19 +25,19 @@ class CreateCommentUseCase {
   async execute({ postId, usrId, content }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "ID é invalido",
+        message: "ID é inválido!",
       });
     }
 
-    const listPostId = await this.postRepository.listById(postId);
+    const listPostById = await this.postRepository.listById(postId);
 
-    if (!listPostId) {
+    if (!listPostById) {
       throw new AppError({
-        message: "Post não encontrado",
+        message: "Post não encontrado!",
       });
     }
 
-    const createCommet = await this.commentRepository.create({
+    const createComment = await this.commentRepository.create({
       id: this.uuidProvider.createUUID(),
       postId,
       userId: usrId,
@@ -48,10 +48,10 @@ class CreateCommentUseCase {
       statusCode: 201,
       message: "Comentário criado com sucesso!",
       data: {
-        id: createCommet.id,
-        postId: createCommet.post_id,
-        userId: createCommet.user_id,
-        content: createCommet.content,
+        id: createComment.id,
+        postId: createComment.post_id,
+        userId: createComment.user_id,
+        content: createComment.content,
       },
     });
   }

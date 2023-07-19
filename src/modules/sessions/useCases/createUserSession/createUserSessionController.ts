@@ -1,17 +1,17 @@
-import { IRequestCreateUserSesssion } from "@modules/users/dto/sessions";
 import { Request, Response } from "express";
+import { IRequestCreateUserSession } from "@modules/sessions/dtos/sessions";
 import { container } from "tsyringe";
 import { CreateUserSessionUseCase } from "./createUserSessionUseCase";
 
 class CreateUserSessionController {
   async handle(request: Request, response: Response) {
-    const { email, password } = request.body as IRequestCreateUserSesssion;
+    const { email, password } = request.body as IRequestCreateUserSession;
 
-    const createUserSesssionUseCase = container.resolve(
+    const createUserSessionUseCase = container.resolve(
       CreateUserSessionUseCase
     );
 
-    const result = await createUserSesssionUseCase.execute({
+    const result = await createUserSessionUseCase.execute({
       email,
       password,
     });

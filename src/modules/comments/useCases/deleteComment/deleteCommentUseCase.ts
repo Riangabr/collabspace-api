@@ -1,7 +1,7 @@
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { ICommentsRepositories } from "@modules/comments/iRepositories/ICommentsRepositories";
-import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRespositories";
+import { IPostsRepositories } from "@modules/posts/iRepositories/IPostsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { inject, injectable } from "tsyringe";
 
@@ -25,14 +25,16 @@ class DeleteCommentUseCase {
   async execute({ usrId, postId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "CommentID é invalido!",
+        message: "CommentID é inválido!",
       });
     }
+
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "PostID é invalido!",
+        message: "PostID é inválido!",
       });
     }
+
     const listCommentById = await this.commentRepository.listById(id);
 
     if (!listCommentById) {
@@ -41,11 +43,11 @@ class DeleteCommentUseCase {
       });
     }
 
-    const listPostById = await this.commentRepository.listById(postId);
+    const listPostById = await this.postRepository.listById(postId);
 
     if (!listPostById) {
       throw new AppError({
-        message: "Post não encontrado",
+        message: "Post não encontrado!",
       });
     }
 

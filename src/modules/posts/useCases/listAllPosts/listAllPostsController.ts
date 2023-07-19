@@ -8,7 +8,7 @@ class ListAllPostsController {
 
     const listAllPostsUseCase = container.resolve(ListAllPostsUseCase);
 
-    const result = await listAllPostsUseCase.execute({ page, limit });
+    const result = await listAllPostsUseCase.excute({ page, limit });
 
     return response.status(result.statusCode).json(result);
   }

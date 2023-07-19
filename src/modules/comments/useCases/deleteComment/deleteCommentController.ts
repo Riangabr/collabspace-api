@@ -14,6 +14,7 @@ class DeleteCommentController {
       postId,
       id,
     });
+
     return response.status(result.statusCode).json(result);
   }
 }

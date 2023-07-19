@@ -1,6 +1,6 @@
 import { prisma } from "@libs/prismaClient";
 import { ICreatePost, IListAllPosts, IPost, IUpdatePost } from "../dtos/posts";
-import { IPostsRepositories } from "../iRepositories/IPostsRespositories";
+import { IPostsRepositories } from "../iRepositories/IPostsRepositories";
 
 class PostRepository implements IPostsRepositories {
   create({
@@ -33,7 +33,6 @@ class PostRepository implements IPostsRepositories {
       take: limit,
       select: {
         id: true,
-        user_id: false,
         content: true,
         tags: true,
         visibility: true,
@@ -50,6 +49,34 @@ class PostRepository implements IPostsRepositories {
             id: true,
             content: true,
             commented_at: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+                avatar_url: true,
+              },
+            },
+            reactions: {
+              select: {
+                id: true,
+                entity_type: true,
+                reacted_at: true,
+                users: {
+                  select: {
+                    id: true,
+                    name: true,
+                    avatar_url: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        reactions: {
+          select: {
+            id: true,
+            entity_type: true,
+            reacted_at: true,
             users: {
               select: {
                 id: true,

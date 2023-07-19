@@ -1,6 +1,6 @@
-import { IBcryptProvider, IBcrypt } from "../IBcryptProvider";
-
 import bcryptjs from "bcryptjs";
+
+import { IBcryptProvider, IBcrypt } from "../IBcryptProvider";
 
 class BcryptProvider implements IBcryptProvider {
   async encryptPassword(password: string): Promise<IBcrypt> {
@@ -17,4 +17,5 @@ class BcryptProvider implements IBcryptProvider {
     return bcryptjs.compare(password, encryptedPassword);
   }
 }
+
 export { BcryptProvider };
