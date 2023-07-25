@@ -11,7 +11,7 @@ interface IRequest {
 }
 
 @injectable()
-class CancelRequestUseCase {
+class AcceptRequestUseCase {
   constructor(
     @inject("FriendRepository")
     private friendRepository: IFriendsRepositories,
@@ -22,7 +22,7 @@ class CancelRequestUseCase {
   async execute({ usrId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido!",
+        message: "ID é invalido",
       });
     }
 
@@ -34,32 +34,33 @@ class CancelRequestUseCase {
       });
     }
 
-    if (usrId !== listFriendById.user_id_1) {
+    if (usrId !== listFriendById.user_id_2) {
       throw new AppError({
-        statusCode: 401,
-        message: "Operação não permitida",
+        message: "Operação não permitida!",
       });
     }
 
-    if (
-      listFriendById.action_id_2 === EnumFriendActions.accepted ||
-      listFriendById.action_id_2 === EnumFriendActions.refused
-    ) {
+    if (listFriendById.action_id_1 !== EnumFriendActions.requested) {
       throw new AppError({
-        message: "Essa solicitação  já foi aceita",
+        message: "Solicitação não pode mais ser aceita!",
+      });
+    }
+
+    if (listFriendById.action_id_2 === EnumFriendActions.accepted) {
+      throw new AppError({
+        message: "Solicitação já aceita!",
       });
     }
 
     await this.friendRepository.updateActionStatus({
       id,
-      actionId1: EnumFriendActions.canceled,
-      actionId2: null,
+      actionId2: EnumFriendActions.accepted,
     });
 
     return new AppResponse({
-      message: "Solicitação cancelada!",
+      message: "Solicitação aceita!",
     });
   }
 }
 
-export { CancelRequestUseCase };
+export { AcceptRequestUseCase };
