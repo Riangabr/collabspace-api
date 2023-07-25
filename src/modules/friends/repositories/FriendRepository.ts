@@ -41,6 +41,12 @@ class FriendRepository implements IFriendsRepositories {
       },
     });
   }
+
+  async delete(id: string): Promise<void> {
+    await prisma.friends.delete({
+      where: { id },
+    });
+  }
 }
 
 export { FriendRepository };
