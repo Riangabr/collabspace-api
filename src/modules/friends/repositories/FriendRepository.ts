@@ -3,6 +3,7 @@ import {
   ICreateFriend,
   IFriend,
   IListAllFriendsByUser,
+  IListAllRequestByUser,
   IUpdateActionStatus,
 } from "../dtos/friends";
 import { IFriendsRepositories } from "../iRepositories/IFriendsRepositories";
@@ -34,7 +35,7 @@ class FriendRepository implements IFriendsRepositories {
     });
   }
 
-  listAllByUser(id: string): Promise<IListAllFriendsByUser[]> {
+  listAllFriendsByUser(id: string): Promise<IListAllFriendsByUser[]> {
     return prisma.friends.findMany({
       where: {
         OR: [{ user_id_1: id }, { user_id_2: id }],
@@ -53,6 +54,29 @@ class FriendRepository implements IFriendsRepositories {
           },
         },
         users_friends_user_id_2Tousers: {
+          select: {
+            id: true,
+            name: true,
+            avatar_url: true,
+          },
+        },
+        created_at: true,
+      },
+    });
+  }
+
+  listAllRequestsByUser(id: string): Promise<IListAllRequestByUser[]> {
+    return prisma.friends.findMany({
+      where: {
+        user_id_2: id,
+        AND: [
+          { action_id_1: EnumFriendActions.requested },
+          { action_id_2: null },
+        ],
+      },
+      select: {
+        id: true,
+        users_friends_user_id_1Tousers: {
           select: {
             id: true,
             name: true,

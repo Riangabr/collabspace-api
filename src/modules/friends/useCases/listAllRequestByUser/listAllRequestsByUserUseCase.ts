@@ -7,17 +7,17 @@ interface IRequest {
 }
 
 @injectable()
-class ListAllFriendsByUserUseCase {
+class ListAllRequestsByUserUseCase {
   constructor(
     @inject("FriendRepository")
     private friendRepository: IFriendsRepositories
   ) {}
 
   async execute({ usrId }: IRequest): Promise<AppResponse> {
-    const listAllFriendsByUser =
-      await this.friendRepository.listAllFriendsByUser(usrId);
+    const listAllRequestsByUser =
+      await this.friendRepository.listAllRequestsByUser(usrId);
 
-    const friends = listAllFriendsByUser.map((friend) => {
+    const requests = listAllRequestsByUser.map((friend) => {
       return {
         id: friend.id,
         user1: {
@@ -25,22 +25,17 @@ class ListAllFriendsByUserUseCase {
           name: friend.users_friends_user_id_1Tousers.name,
           avatarUrl: friend.users_friends_user_id_1Tousers.avatar_url,
         },
-        user2: {
-          id: friend.users_friends_user_id_2Tousers.id,
-          name: friend.users_friends_user_id_2Tousers.name,
-          avatarUrl: friend.users_friends_user_id_2Tousers.avatar_url,
-        },
         createdAt: friend.created_at,
       };
     });
 
     return new AppResponse({
-      message: "Amizades listadas com sucesso!",
+      message: "Solicitações listadas com sucesso!",
       data: {
-        friends,
+        requests,
       },
     });
   }
 }
 
-export { ListAllFriendsByUserUseCase };
+export { ListAllRequestsByUserUseCase };

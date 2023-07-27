@@ -32,4 +32,16 @@ interface IListAllFriendsByUser {
   created_at: Date;
 }
 
-export { IFriend, ICreateFriend, IUpdateActionStatus, IListAllFriendsByUser };
+interface IListAllRequestByUser {
+  id: string;
+  users_friends_user_id_1Tousers: User;
+  created_at: Date;
+}
+
+export {
+  IFriend,
+  ICreateFriend,
+  IUpdateActionStatus,
+  IListAllFriendsByUser,
+  IListAllRequestByUser,
+};
