@@ -25,11 +25,18 @@ class ListUserByIdUseCase {
     }
 
     const listUserById = await this.userRepository.listById(id);
-
+    const user = {
+      id: listUserById?.id,
+      name: listUserById?.name,
+      email: listUserById?.email,
+      birthDate: listUserById?.birth_date,
+      avatarUrl: listUserById?.avatar_url,
+      createdAt: listUserById?.created_at,
+    };
     return new AppResponse({
       message: "success",
       data: {
-        user: listUserById,
+        user,
       },
     });
   }
