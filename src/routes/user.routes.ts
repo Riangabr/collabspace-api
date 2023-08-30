@@ -6,6 +6,7 @@ import { InactivateUserController } from "@modules/users/useCases/inactivateUser
 
 import { authentication } from "src/middlewares/authentication";
 import { UpadateAvatarController } from "@modules/users/useCases/updateAvatar/updateAvatarController";
+import { ListUserByIdController } from "@modules/users/useCases/listUserById/listUserByIdController";
 
 const userRoutes = Router();
 
@@ -13,6 +14,7 @@ userRoutes.post("/", new CreateUserController().handle);
 
 userRoutes.use(authentication);
 
+userRoutes.get("/:id", new ListUserByIdController().handle);
 userRoutes.put("/", new UpdateUserController().handle);
 userRoutes.patch("/updateAvatar", new UpadateAvatarController().handle);
 userRoutes.delete("/", new InactivateUserController().handle);
