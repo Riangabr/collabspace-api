@@ -29,6 +29,9 @@ class PostRepository implements IPostsRepositories {
 
   listAll(page: number, limit: number): Promise<IListAllPosts[]> {
     return prisma.posts.findMany({
+      orderBy: {
+        published_at: "desc",
+      },
       skip: page * limit,
       take: limit,
       select: {

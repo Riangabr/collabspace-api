@@ -29,6 +29,7 @@ class ListUserByIdUseCase {
       id: listUserById?.id,
       name: listUserById?.name,
       email: listUserById?.email,
+      telephone: listUserById?.telephone,
       birthDate: listUserById?.birth_date,
       avatarUrl: listUserById?.avatar_url,
       createdAt: listUserById?.created_at,
