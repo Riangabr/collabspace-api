@@ -44,6 +44,7 @@ class PostRepository implements IPostsRepositories {
           select: {
             id: true,
             name: true,
+            email: true,
             avatar_url: true,
           },
         },
@@ -56,6 +57,7 @@ class PostRepository implements IPostsRepositories {
               select: {
                 id: true,
                 name: true,
+                email: true,
                 avatar_url: true,
               },
             },
@@ -68,6 +70,7 @@ class PostRepository implements IPostsRepositories {
                   select: {
                     id: true,
                     name: true,
+                    email: true,
                     avatar_url: true,
                   },
                 },
@@ -84,6 +87,7 @@ class PostRepository implements IPostsRepositories {
               select: {
                 id: true,
                 name: true,
+                email: true,
                 avatar_url: true,
               },
             },
