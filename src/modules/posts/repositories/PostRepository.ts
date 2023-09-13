@@ -47,14 +47,6 @@ class PostRepository implements IPostsRepositories {
         tags: true,
         visibility: true,
         published_at: true,
-        users: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
-            avatar_url: true,
-          },
-        },
       },
     });
   }
@@ -81,6 +73,9 @@ class PostRepository implements IPostsRepositories {
           },
         },
         comments: {
+          orderBy: {
+            commented_at: "desc",
+          },
           select: {
             id: true,
             content: true,
