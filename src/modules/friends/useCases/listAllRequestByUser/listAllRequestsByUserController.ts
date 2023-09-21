@@ -9,6 +9,7 @@ class ListAllRequestsByUserController {
     const listAllRequestsByUserUseCase = container.resolve(
       ListAllRequestsByUserUseCase
     );
+
     const result = await listAllRequestsByUserUseCase.execute({ usrId });
 
     return response.status(result.statusCode).json(result);

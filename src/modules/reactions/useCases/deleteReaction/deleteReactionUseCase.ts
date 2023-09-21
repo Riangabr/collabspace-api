@@ -1,8 +1,8 @@
-import { AppError } from "@helpers/errorsHandler";
-import { AppResponse } from "@helpers/responseParser";
+import { inject, injectable } from "tsyringe";
 import { IReactionsRepositories } from "@modules/reactions/iRepositories/IReactionsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { inject, injectable } from "tsyringe";
+import { AppResponse } from "@helpers/responseParser";
+import { AppError } from "@helpers/errorsHandler";
 
 interface IRequest {
   usrId: string;
@@ -29,14 +29,14 @@ class DeleteReactionUseCase {
 
     if (!listReactionById) {
       throw new AppError({
-        message: "Reaçaõ não encontrada!",
+        message: "Reação não encontrada!",
       });
     }
 
     if (usrId !== listReactionById.user_id) {
       throw new AppError({
         statusCode: 401,
-        message: "Operação não permitida!",
+        message: "Operaçao não permitida!",
       });
     }
 

@@ -3,7 +3,7 @@ import {
   ICreateFriend,
   IFriend,
   IListAllFriendsByUser,
-  IListAllRequestByUser,
+  IListAllRequestsByUser,
   IUpdateActionStatus,
 } from "../dtos/friends";
 import { IFriendsRepositories } from "../iRepositories/IFriendsRepositories";
@@ -26,7 +26,7 @@ class FriendRepository implements IFriendsRepositories {
     });
   }
 
-  listAlreadyExits(userId1: string, userId2: string): Promise<IFriend | null> {
+  listAlreadyExists(userId1: string, userId2: string): Promise<IFriend | null> {
     return prisma.friends.findFirst({
       where: {
         user_id_1: userId1,
@@ -38,10 +38,21 @@ class FriendRepository implements IFriendsRepositories {
   listAllFriendsByUser(id: string): Promise<IListAllFriendsByUser[]> {
     return prisma.friends.findMany({
       where: {
-        OR: [{ user_id_1: id }, { user_id_2: id }],
+        OR: [
+          {
+            user_id_1: id,
+          },
+          {
+            user_id_2: id,
+          },
+        ],
         AND: [
-          { action_id_1: EnumFriendActions.requested },
-          { action_id_2: EnumFriendActions.accepted },
+          {
+            action_id_1: EnumFriendActions.requested,
+          },
+          {
+            action_id_2: EnumFriendActions.accepted,
+          },
         ],
       },
       select: {
@@ -65,13 +76,17 @@ class FriendRepository implements IFriendsRepositories {
     });
   }
 
-  listAllRequestsByUser(id: string): Promise<IListAllRequestByUser[]> {
+  listAllRequestsByUser(id: string): Promise<IListAllRequestsByUser[]> {
     return prisma.friends.findMany({
       where: {
         user_id_2: id,
         AND: [
-          { action_id_1: EnumFriendActions.requested },
-          { action_id_2: null },
+          {
+            action_id_1: EnumFriendActions.requested,
+          },
+          {
+            action_id_2: null,
+          },
         ],
       },
       select: {

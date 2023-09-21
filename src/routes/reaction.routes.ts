@@ -10,7 +10,6 @@ const reactionRoutes = Router();
 reactionRoutes.use(authentication);
 
 reactionRoutes.post("/", new CreateReactionController().handle);
-
 reactionRoutes.delete("/:id", new DeleteReactionController().handle);
 
 export { reactionRoutes };

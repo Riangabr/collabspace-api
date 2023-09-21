@@ -1,14 +1,15 @@
-import { IRequestUpdateUserAvatar } from "@modules/users/dtos/users";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { IRequestUpdateUserAvatar } from "@modules/users/dtos/users";
 import { UpdateAvatarUseCase } from "./updateAvatarUseCase";
 
-class UpadateAvatarController {
+class UpdateAvatarController {
   async handle(request: Request, response: Response) {
     const { usrId } = request;
     const { avatarUrl } = request.body as IRequestUpdateUserAvatar;
 
     const updateAvatarUseCase = container.resolve(UpdateAvatarUseCase);
+
     const result = await updateAvatarUseCase.execute({
       usrId,
       avatarUrl,
@@ -18,4 +19,4 @@ class UpadateAvatarController {
   }
 }
 
-export { UpadateAvatarController };
+export { UpdateAvatarController };

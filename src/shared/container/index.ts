@@ -31,6 +31,7 @@ container.registerSingleton<IReactionsRepositories>(
   "ReactionRepository",
   ReactionRepository
 );
+
 container.registerSingleton<IFriendsRepositories>(
   "FriendRepository",
   FriendRepository

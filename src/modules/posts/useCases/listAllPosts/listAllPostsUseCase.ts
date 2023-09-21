@@ -83,6 +83,7 @@ class ListAllPostsUseCase {
         user: {
           id: users.id,
           name: users.name,
+          email: users.email,
           avatarUrl: users.avatar_url,
         },
         comments,

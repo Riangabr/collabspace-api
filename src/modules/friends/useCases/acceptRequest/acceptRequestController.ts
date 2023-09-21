@@ -8,6 +8,7 @@ class AcceptRequestController {
     const { id } = request.params as { id: string };
 
     const acceptRequestUseCase = container.resolve(AcceptRequestUseCase);
+
     const result = await acceptRequestUseCase.execute({
       usrId,
       id,

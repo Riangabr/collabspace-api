@@ -8,6 +8,7 @@ class CancelRequestController {
     const { id } = request.params as { id: string };
 
     const cancelRequestUseCase = container.resolve(CancelRequestUseCase);
+
     const result = await cancelRequestUseCase.execute({
       usrId,
       id,

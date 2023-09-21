@@ -40,5 +40,4 @@ export {
   ICreateComment,
   IRequestUpdateComment,
   IUpdateComment,
-  User,
 };

@@ -29,15 +29,4 @@ interface ICreateReaction {
   entityType: number;
 }
 
-interface IRequestDeleteReaction {
-  id: string;
-  userId: string;
-  reactedAt: Date;
-}
-
-export {
-  IReaction,
-  IRequestCreateReaction,
-  ICreateReaction,
-  IRequestDeleteReaction,
-};
+export { IReaction, IRequestCreateReaction, ICreateReaction };

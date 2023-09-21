@@ -2,8 +2,8 @@ import { prisma } from "@libs/prismaClient";
 
 import {
   ICreateUser,
-  IUpadateUserAvatar,
   IUpdateUser,
+  IUpdateUserAvatar,
   IUser,
 } from "@modules/users/dtos/users";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
@@ -54,7 +54,7 @@ class UserRepository implements IUsersRepositories {
     });
   }
 
-  async updateAvatar({ id, avatarUrl }: IUpadateUserAvatar): Promise<void> {
+  async updateAvatar({ id, avatarUrl }: IUpdateUserAvatar): Promise<void> {
     await prisma.users.update({
       where: { id },
       data: {

@@ -1,6 +1,6 @@
+import { inject, injectable } from "tsyringe";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
-import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;

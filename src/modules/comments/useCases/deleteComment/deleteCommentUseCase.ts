@@ -25,13 +25,13 @@ class DeleteCommentUseCase {
   async execute({ usrId, postId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "CommentID é inválido!",
+        message: "CommentID inválido!",
       });
     }
 
     if (!this.uuidProvider.validateUUID(postId)) {
       throw new AppError({
-        message: "PostID é inválido!",
+        message: "PostID inválido!",
       });
     }
 

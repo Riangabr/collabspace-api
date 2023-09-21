@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { RecuseRequestUseCase } from "./recuseRequestUseCase";
 import { container } from "tsyringe";
+import { RecuseRequestUseCase } from "./recuseRequestUseCase";
 
 class RecuseRequestController {
   async handle(request: Request, response: Response) {
@@ -8,6 +8,7 @@ class RecuseRequestController {
     const { id } = request.params as { id: string };
 
     const recuseRequestUseCase = container.resolve(RecuseRequestUseCase);
+
     const result = await recuseRequestUseCase.execute({
       usrId,
       id,

@@ -1,14 +1,15 @@
+import { inject, injectable } from "tsyringe";
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { EnumFriendActions } from "src/enums/friendActions";
-import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
   id: string;
 }
+
 @injectable()
 class DeleteFriendUseCase {
   constructor(
@@ -21,7 +22,7 @@ class DeleteFriendUseCase {
   async execute({ usrId, id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID é invalido!",
+        message: "ID inválido!",
       });
     }
 
@@ -32,9 +33,10 @@ class DeleteFriendUseCase {
         message: "Amizade não encontrada!",
       });
     }
+
     if (
-      usrId !== listFriendById.user_id_1 ||
-      usrId !== listFriendById.user_id_1
+      usrId !== listFriendById.user_id_1 &&
+      usrId !== listFriendById.user_id_2
     ) {
       throw new AppError({
         statusCode: 401,

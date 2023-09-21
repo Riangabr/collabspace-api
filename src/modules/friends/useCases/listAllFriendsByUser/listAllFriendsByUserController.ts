@@ -9,6 +9,7 @@ class ListAllFriendsByUserController {
     const listAllFriendsByUserUseCase = container.resolve(
       ListAllFriendsByUserUseCase
     );
+
     const result = await listAllFriendsByUserUseCase.execute({ usrId });
 
     return response.status(result.statusCode).json(result);

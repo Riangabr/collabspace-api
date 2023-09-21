@@ -8,6 +8,7 @@ class CreateFriendController {
     const { targetId } = request.params as { targetId: string };
 
     const createFriendUseCase = container.resolve(CreateFriendUseCase);
+
     const result = await createFriendUseCase.execute({
       usrId,
       targetId,

@@ -47,7 +47,7 @@ interface IRequestUpdateUserAvatar {
   avatarUrl: string;
 }
 
-interface IUpadateUserAvatar {
+interface IUpdateUserAvatar {
   id: string;
   avatarUrl: string;
 }
@@ -58,6 +58,6 @@ export {
   IRequestCreateUser,
   IRequestUpdateUser,
   IUpdateUser,
+  IUpdateUserAvatar,
   IRequestUpdateUserAvatar,
-  IUpadateUserAvatar,
 };

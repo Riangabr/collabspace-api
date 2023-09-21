@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
+
 export enum EnumReactionTypes {
-  liked = 1, // Gostuei
+  liked = 1, // Eu gostum
   loved = 2, // Não gostuei, asmei
-  laungh = 3, // HaHa
+  laughs = 3, // HaHa
   angry = 4, // Grr
-  sad = 5, //
-  notKidding = 6, // Truaisti
+  sad = 5, // Truaisti,
+  notKidding = 6, // Lá ele
 }
