@@ -1,8 +1,8 @@
 import {
-  IUpdateUserCover,
   ICreateUser,
   IUpdateUser,
   IUpdateUserAvatar,
+  IUpdateUserCover,
   IUser,
 } from "@modules/users/dtos/users";
 

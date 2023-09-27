@@ -1,6 +1,6 @@
-import { IRequestUpdateUserCover } from "@modules/users/dtos/users";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { IRequestUpdateUserCover } from "@modules/users/dtos/users";
 import { UpdateCoverUseCase } from "./updateCoverUseCase";
 
 class UpdateCoverController {
