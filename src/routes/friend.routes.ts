@@ -16,7 +16,7 @@ const friendRoutes = Router();
 friendRoutes.use(authentication);
 
 friendRoutes.get(
-  "/listAllFriends",
+  "/listAllFriends/:id",
   new ListAllFriendsByUserController().handle
 );
 
