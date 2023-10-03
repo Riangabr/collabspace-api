@@ -4,13 +4,13 @@ import { ListAllRequestsByUserUseCase } from "./listAllRequestsByUserUseCase";
 
 class ListAllRequestsByUserController {
   async handle(request: Request, response: Response) {
-    const { usrId } = request;
+    const { id } = request.params as { id: string };
 
     const listAllRequestsByUserUseCase = container.resolve(
       ListAllRequestsByUserUseCase
     );
 
-    const result = await listAllRequestsByUserUseCase.execute({ usrId });
+    const result = await listAllRequestsByUserUseCase.execute({ id });
 
     return response.status(result.statusCode).json(result);
   }
