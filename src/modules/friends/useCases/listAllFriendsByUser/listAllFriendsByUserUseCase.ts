@@ -20,7 +20,7 @@ class ListAllFriendsByUserUseCase {
   async execute({ id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID invalido!",
+        message: "ID inválido!",
       });
     }
 
