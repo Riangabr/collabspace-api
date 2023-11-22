@@ -1,9 +1,9 @@
-import { inject, injectable } from "tsyringe";
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { EnumFriendActions } from "src/enums/friendActions";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
@@ -26,28 +26,28 @@ class RecuseRequestUseCase {
       });
     }
 
-    const listFriendById = await this.friendRepository.listById(id);
+    const listFriendByID = await this.friendRepository.listById(id);
 
-    if (!listFriendById) {
+    if (!listFriendByID) {
       throw new AppError({
         message: "Solicitação não encontrada!",
       });
     }
 
-    if (usrId !== listFriendById.user_id_2) {
+    if (usrId !== listFriendByID.user_id_2) {
       throw new AppError({
         statusCode: 401,
-        message: "Operação não permitida!",
+        message: "Operação ão permitida!",
       });
     }
 
-    if (listFriendById.action_id_2 === EnumFriendActions.refused) {
+    if (listFriendByID.action_id_2 === EnumFriendActions.refused) {
       throw new AppError({
         message: "Solicitação já recusada!",
       });
     }
 
-    if (listFriendById.action_id_1 !== EnumFriendActions.requested) {
+    if (listFriendByID.action_id_1 !== EnumFriendActions.requested) {
       throw new AppError({
         message: "Solicitação foi cancelada ou aceita!",
       });
@@ -59,7 +59,7 @@ class RecuseRequestUseCase {
     });
 
     return new AppResponse({
-      message: "Solicitação recusada!",
+      message: "Solicitação recusada com sucesso!",
     });
   }
 }

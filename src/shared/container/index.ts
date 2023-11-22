@@ -11,6 +11,8 @@ import { IReactionsRepositories } from "@modules/reactions/iRepositories/IReacti
 import { ReactionRepository } from "@modules/reactions/repositories/ReactionRepository";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { FriendRepository } from "@modules/friends/repositories/FriendRepository";
+import { IAddressRepositories } from "@modules/address/iRepositories/IAddressRepositories";
+import { AddressRepository } from "@modules/address/repositories/AddressRepository";
 
 container.registerSingleton<IUsersRepositories>(
   "UserRepository",
@@ -35,4 +37,9 @@ container.registerSingleton<IReactionsRepositories>(
 container.registerSingleton<IFriendsRepositories>(
   "FriendRepository",
   FriendRepository
+);
+
+container.registerSingleton<IAddressRepositories>(
+  "AddressRepository",
+  AddressRepository
 );

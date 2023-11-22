@@ -1,5 +1,11 @@
 import { prisma } from "@libs/prismaClient";
-import { ICreatePost, IListAllPosts, IPost, IUpdatePost } from "../dtos/posts";
+import {
+  ICreatePost,
+  IListAllPosts,
+  IListAllPostsByUser,
+  IPost,
+  IUpdatePost,
+} from "../dtos/posts";
 import { IPostsRepositories } from "../iRepositories/IPostsRepositories";
 
 class PostRepository implements IPostsRepositories {
@@ -124,8 +130,92 @@ class PostRepository implements IPostsRepositories {
     });
   }
 
+  listAllByUser(
+    id: string,
+    page: number,
+    limit: number
+  ): Promise<IListAllPostsByUser[]> {
+    return prisma.posts.findMany({
+      where: { user_id: id },
+      orderBy: {
+        published_at: "desc",
+      },
+      skip: page * limit,
+      take: limit,
+      select: {
+        id: true,
+        content: true,
+        tags: true,
+        visibility: true,
+        published_at: true,
+        users: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            avatar_url: true,
+          },
+        },
+        comments: {
+          orderBy: {
+            commented_at: "desc",
+          },
+          select: {
+            id: true,
+            content: true,
+            commented_at: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                avatar_url: true,
+              },
+            },
+            reactions: {
+              select: {
+                id: true,
+                entity_type: true,
+                reacted_at: true,
+                users: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    avatar_url: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        reactions: {
+          select: {
+            id: true,
+            entity_type: true,
+            reacted_at: true,
+            users: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                avatar_url: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   count(): Promise<number> {
     return prisma.posts.count();
+  }
+
+  countByUser(id: string): Promise<number> {
+    return prisma.posts.count({
+      where: { user_id: id },
+    });
   }
 
   async update({ id, content, tags, visibility }: IUpdatePost): Promise<void> {

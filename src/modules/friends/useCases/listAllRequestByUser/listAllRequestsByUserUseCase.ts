@@ -1,8 +1,8 @@
-import { inject, injectable } from "tsyringe";
+import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   id: string;
@@ -20,7 +20,7 @@ class ListAllRequestsByUserUseCase {
   async execute({ id }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(id)) {
       throw new AppError({
-        message: "ID inválido!",
+        message: "User ID é inválido!",
       });
     }
 

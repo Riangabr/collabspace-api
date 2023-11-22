@@ -65,9 +65,21 @@ model users {
   active                           Boolean     @default(true)
   cover_url                        String?     @db.VarChar
   bio                              String?     @db.VarChar
+  address                          address[]
   comments                         comments[]
   friends_friends_user_id_1Tousers friends[]   @relation("friends_user_id_1Tousers")
   friends_friends_user_id_2Tousers friends[]   @relation("friends_user_id_2Tousers")
   posts                            posts[]
   reactions                        reactions[]
+}
+
+model address {
+  id       String  @id @db.Uuid
+  user_id  String  @db.Uuid
+  cep      String? @db.VarChar
+  country  String? @db.VarChar
+  province String? @db.VarChar
+  city     String? @db.VarChar
+  street   String? @db.VarChar
+  users    users   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

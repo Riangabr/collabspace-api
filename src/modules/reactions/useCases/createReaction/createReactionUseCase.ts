@@ -45,7 +45,7 @@ class CreateReactionUseCase {
     if (postId) {
       if (!this.uuidProvider.validateUUID(postId)) {
         throw new AppError({
-          message: "PostID inválido!",
+          message: "PostID é inválido!",
         });
       }
 
@@ -61,7 +61,7 @@ class CreateReactionUseCase {
     if (commentId) {
       if (!this.uuidProvider.validateUUID(commentId)) {
         throw new AppError({
-          message: "CommentID inválido!",
+          message: "CommentID é inválido!",
         });
       }
 
@@ -74,14 +74,14 @@ class CreateReactionUseCase {
       }
     }
 
-    const countReactionUserPost =
+    const countReationUserPost =
       await this.reactionRepository.countReactionUserPost(usrId, postId);
 
     const countReactionUserComment =
       await this.reactionRepository.countReactionUserComment(usrId, commentId);
 
     if (
-      (postId && countReactionUserPost) ||
+      (postId && countReationUserPost) ||
       (commentId && countReactionUserComment)
     ) {
       throw new AppError({

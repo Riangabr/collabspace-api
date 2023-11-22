@@ -1,12 +1,13 @@
+import { IRequestUpdateUserCover } from "@modules/users/dtos/users";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { IRequestUpdateUserCover } from "@modules/users/dtos/users";
 import { UpdateCoverUseCase } from "./updateCoverUseCase";
 
 class UpdateCoverController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { coverUrl } = request.body as IRequestUpdateUserCover;
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
+
+    const { coverUrl } = req.body as IRequestUpdateUserCover;
 
     const updateCoverUseCase = container.resolve(UpdateCoverUseCase);
 
@@ -15,7 +16,7 @@ class UpdateCoverController {
       coverUrl,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 

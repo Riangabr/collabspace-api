@@ -6,9 +6,9 @@ class ListUserByIdController {
   async handle(request: Request, response: Response) {
     const { id } = request.params as { id: string };
 
-    const listUserByIdUseCase = container.resolve(ListUserByIdUseCase);
+    const listUserIdByUseCase = container.resolve(ListUserByIdUseCase);
 
-    const result = await listUserByIdUseCase.execute({ id });
+    const result = await listUserIdByUseCase.execute({ id });
 
     return response.status(result.statusCode).json(result);
   }

@@ -104,9 +104,9 @@ class FriendRepository implements IFriendsRepositories {
   }
 
   async updateActionStatus({
-    id,
     actionId1,
     actionId2,
+    id,
   }: IUpdateActionStatus): Promise<void> {
     await prisma.friends.update({
       where: { id },

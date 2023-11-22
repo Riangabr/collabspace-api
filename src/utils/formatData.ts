@@ -5,7 +5,7 @@ function telephoneFormat(telephone: string | null): string | undefined {
         .replaceAll(")", "")
         .replaceAll(" ", "")
         .replaceAll("-", "")
-    : undefined;
+    : "";
 }
 
 export { telephoneFormat };

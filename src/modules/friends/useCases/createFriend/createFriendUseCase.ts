@@ -1,10 +1,10 @@
-import { inject, injectable } from "tsyringe";
-import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
-import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { AppResponse } from "@helpers/responseParser";
-import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { AppError } from "@helpers/errorsHandler";
+import { AppResponse } from "@helpers/responseParser";
+import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
+import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
+import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { EnumFriendActions } from "src/enums/friendActions";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
@@ -25,7 +25,7 @@ class CreateFriendUseCase {
   async execute({ usrId, targetId }: IRequest): Promise<AppResponse> {
     if (!this.uuidProvider.validateUUID(targetId)) {
       throw new AppError({
-        message: "ID inválido!",
+        message: "ID é inválido!",
       });
     }
 
@@ -85,7 +85,7 @@ class CreateFriendUseCase {
         listFriendshipAlreadyExists.action_id_2 === EnumFriendActions.accepted
       ) {
         throw new AppError({
-          message: "A solicitação já foi aceita!",
+          message: "Solicitação já foi aceita!",
         });
       }
     }

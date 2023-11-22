@@ -66,6 +66,7 @@ class CreateUserSessionUseCase {
           avatarUrl: listUserByEmail.avatar_url,
           coverUrl: listUserByEmail.cover_url,
           createdAt: listUserByEmail.created_at,
+          address: listUserByEmail.address,
         },
       },
     });

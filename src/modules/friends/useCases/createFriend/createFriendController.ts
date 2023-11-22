@@ -3,9 +3,9 @@ import { container } from "tsyringe";
 import { CreateFriendUseCase } from "./createFriendUseCase";
 
 class CreateFriendController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { targetId } = request.params as { targetId: string };
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
+    const { targetId } = req.params as { targetId: string };
 
     const createFriendUseCase = container.resolve(CreateFriendUseCase);
 
@@ -14,7 +14,7 @@ class CreateFriendController {
       targetId,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 

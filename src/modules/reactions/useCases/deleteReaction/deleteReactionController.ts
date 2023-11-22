@@ -3,9 +3,9 @@ import { container } from "tsyringe";
 import { DeleteReactionUseCase } from "./deleteReactionUseCase";
 
 class DeleteReactionController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { id } = request.params as { id: string };
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
+    const { id } = req.params as { id: string };
 
     const deleteReactionUseCase = container.resolve(DeleteReactionUseCase);
 
@@ -14,7 +14,7 @@ class DeleteReactionController {
       id,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 

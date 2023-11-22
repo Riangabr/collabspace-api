@@ -3,9 +3,10 @@ import { container } from "tsyringe";
 import { RecuseRequestUseCase } from "./recuseRequestUseCase";
 
 class RecuseRequestController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { id } = request.params as { id: string };
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
+
+    const { id } = req.params as { id: string };
 
     const recuseRequestUseCase = container.resolve(RecuseRequestUseCase);
 
@@ -14,7 +15,7 @@ class RecuseRequestController {
       id,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 

@@ -1,8 +1,8 @@
-import { inject, injectable } from "tsyringe";
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IUsersRepositories } from "@modules/users/iRepositories/IUsersRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   id: string;
@@ -39,7 +39,7 @@ class ListUserByIdUseCase {
     };
 
     return new AppResponse({
-      message: "Usuário listado com sucesso!",
+      message: "Success",
       data: {
         user,
       },

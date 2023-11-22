@@ -1,8 +1,8 @@
-import { inject, injectable } from "tsyringe";
+import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
-import { AppError } from "@helpers/errorsHandler";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   id: string;
@@ -23,7 +23,6 @@ class ListAllFriendsByUserUseCase {
         message: "ID inválido!",
       });
     }
-
     const listAllFriendsByUser =
       await this.friendRepository.listAllFriendsByUser(id);
 

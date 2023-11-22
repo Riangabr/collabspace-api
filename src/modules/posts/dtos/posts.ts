@@ -68,6 +68,8 @@ interface IListAllPosts {
   reactions: Reaction[];
 }
 
+type IListAllPostsByUser = IListAllPosts;
+
 export {
   IPost,
   IRequestCreatePost,
@@ -75,4 +77,5 @@ export {
   IRequestUpdatePost,
   IUpdatePost,
   IListAllPosts,
+  IListAllPostsByUser,
 };

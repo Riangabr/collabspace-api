@@ -1,9 +1,9 @@
-import { inject, injectable } from "tsyringe";
 import { AppError } from "@helpers/errorsHandler";
 import { AppResponse } from "@helpers/responseParser";
 import { IFriendsRepositories } from "@modules/friends/iRepositories/IFriendsRepositories";
 import { IUuidProvider } from "@shared/container/providers/uuidProvider/IUuidProvider";
 import { EnumFriendActions } from "src/enums/friendActions";
+import { inject, injectable } from "tsyringe";
 
 interface IRequest {
   usrId: string;
@@ -26,24 +26,23 @@ class CancelRequestUseCase {
       });
     }
 
-    const listFriendById = await this.friendRepository.listById(id);
+    const listFriendByID = await this.friendRepository.listById(id);
 
-    if (!listFriendById) {
+    if (!listFriendByID) {
       throw new AppError({
         message: "Solicitação não encontrada!",
       });
     }
 
-    if (usrId !== listFriendById.user_id_1) {
+    if (usrId !== listFriendByID.user_id_1) {
       throw new AppError({
-        statusCode: 401,
-        message: "Operação não permitida!",
+        message: "Operação ão permitida!",
       });
     }
 
     if (
-      listFriendById.action_id_2 === EnumFriendActions.accepted ||
-      listFriendById.action_id_2 === EnumFriendActions.refused
+      listFriendByID.action_id_2 === EnumFriendActions.accepted ||
+      listFriendByID.action_id_2 === EnumFriendActions.refused
     ) {
       throw new AppError({
         message: "Essa solicitação já foi aceita ou recusada!",
@@ -57,7 +56,7 @@ class CancelRequestUseCase {
     });
 
     return new AppResponse({
-      message: "Solicitação cancelada!",
+      message: "Solicitação cancelada com sucesso!",
     });
   }
 }

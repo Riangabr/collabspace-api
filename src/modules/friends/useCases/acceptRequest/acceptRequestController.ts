@@ -3,18 +3,19 @@ import { container } from "tsyringe";
 import { AcceptRequestUseCase } from "./acceptRequestUseCase";
 
 class AcceptRequestController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { id } = request.params as { id: string };
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
 
-    const acceptRequestUseCase = container.resolve(AcceptRequestUseCase);
+    const { id } = req.params as { id: string };
 
-    const result = await acceptRequestUseCase.execute({
+    const acceptedRequestUseCase = container.resolve(AcceptRequestUseCase);
+
+    const result = await acceptedRequestUseCase.execute({
       usrId,
       id,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 

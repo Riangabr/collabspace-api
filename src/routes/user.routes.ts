@@ -6,8 +6,9 @@ import { InactivateUserController } from "@modules/users/useCases/inactivateUser
 
 import { authentication } from "src/middlewares/authentication";
 import { UpdateAvatarController } from "@modules/users/useCases/updateAvatar/updateAvatarController";
-import { UpdateCoverController } from "@modules/users/useCases/updateCover/updateCoverController";
 import { ListUserByIdController } from "@modules/users/useCases/listUserById/listUserByIdController";
+import { UpdateCoverController } from "@modules/users/useCases/updateCover/updateCoverController";
+import { UpdatePasswordController } from "@modules/users/useCases/updatePassword/updatePasswordController";
 
 const userRoutes = Router();
 
@@ -19,6 +20,7 @@ userRoutes.get("/:id", new ListUserByIdController().handle);
 userRoutes.put("/", new UpdateUserController().handle);
 userRoutes.patch("/updateAvatar", new UpdateAvatarController().handle);
 userRoutes.patch("/updateCover", new UpdateCoverController().handle);
+userRoutes.patch("/updatePassword", new UpdatePasswordController().handle);
 userRoutes.delete("/", new InactivateUserController().handle);
 
 export { userRoutes };

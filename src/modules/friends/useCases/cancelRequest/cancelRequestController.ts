@@ -3,9 +3,10 @@ import { container } from "tsyringe";
 import { CancelRequestUseCase } from "./cancelRequestUseCase";
 
 class CancelRequestController {
-  async handle(request: Request, response: Response) {
-    const { usrId } = request;
-    const { id } = request.params as { id: string };
+  async handle(req: Request, res: Response) {
+    const { usrId } = req;
+
+    const { id } = req.params as { id: string };
 
     const cancelRequestUseCase = container.resolve(CancelRequestUseCase);
 
@@ -14,7 +15,7 @@ class CancelRequestController {
       id,
     });
 
-    return response.status(result.statusCode).json(result);
+    return res.status(result.statusCode).json(result);
   }
 }
 
